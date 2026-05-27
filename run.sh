@@ -4,15 +4,15 @@ PID_FILE=".dev-server.pid"
 
 start() {
     if [ -f "$PID_FILE" ] && kill -0 "$(cat "$PID_FILE")" 2>/dev/null; then
-        echo "⚡ Server already running (PID $(cat "$PID_FILE"))"
+        echo " Server already running (PID $(cat "$PID_FILE"))"
         echo "   → http://localhost:5173"
         return
     fi
-    echo "🚀 Starting DSA Mastery..."
+    echo " Starting DSA Mastery..."
     npm run dev &>/dev/null &
     echo $! > "$PID_FILE"
     sleep 1
-    echo "✅ Running at http://localhost:5173  (PID $(cat "$PID_FILE"))"
+    echo " Running at http://localhost:5173  (PID $(cat "$PID_FILE"))"
 }
 
 stop() {
@@ -22,11 +22,11 @@ stop() {
         # Also kill any child node processes on port 5173
         lsof -ti:5173 2>/dev/null | xargs kill 2>/dev/null
         rm -f "$PID_FILE"
-        echo "🛑 Server stopped"
+        echo " Server stopped"
     else
         # Try killing by port anyway
         lsof -ti:5173 2>/dev/null | xargs kill 2>/dev/null
-        echo "🛑 Server stopped"
+        echo " Server stopped"
     fi
 }
 
